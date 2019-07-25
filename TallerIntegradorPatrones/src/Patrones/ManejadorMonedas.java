@@ -5,18 +5,21 @@
  */
 package Patrones;
 
-public class Manejador
-{
+/**
+ *
+ * @author CltControl
+ */
+public class ManejadorMonedas {
     protected int monto;
-    protected int denominacion;
+    protected double denominacion;
 
-    public Manejador(int monto, int denominacion){
+    public ManejadorMonedas(int monto, double denominacion){
         this.monto = monto; // Total de billetes
         this.denominacion = denominacion; // Valor de cada billete
     }
 
     public int getMonto(){ return monto; }
-    public int getDenominacion(){ return denominacion; }
+    public double getDenominacion(){ return denominacion; }
     public void setMonto(int monto){ this.monto = monto; }
 
     public boolean retirar(int monto){

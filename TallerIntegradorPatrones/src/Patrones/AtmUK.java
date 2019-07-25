@@ -8,12 +8,14 @@ package Patrones;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class AtmUK {
-    protected final Currency currency=Locale.UK;
+    //SE CAMBIO Currency POR Locale YA QUE DABA ERROR
+    protected final Locale currency=Locale.UK;
     protected double dinero = 0;
     protected ArrayList <Manejador> manejadores; // Cada manejador puede entregar dinero de una sola denominación
-
+    
     // -----------------
     public AtmUK() {
       manejadores = new ArrayList<Manejador>();
@@ -45,18 +47,20 @@ public class AtmUK {
     //Dentro de las transacciones se debe llamar al ATM para hacer el retiro o deposito de la cuenta correspondiente
     public static void transaction(Account cuenta){
         // here is where most of the work is
+        Scanner sc = new Scanner(System.in);
+
         int choice; 
         System.out.println("Please select an option"); 
         System.out.println("1. Withdraw");
         System.out.println("2. Deposit");
         System.out.println("3. Balance");
         System.out.println("4. Balance ATM");
-        choice = in.nextInt();
+        choice = sc.nextInt();
         switch(choice){
             case 1:
                 float amount; 
                 System.out.println("Please enter amount to withdraw: "); 
-                amount = in.nextFloat();
+                amount = sc.nextFloat();
                 if(amount > cuenta.getAmount() || amount == 0){
                     System.out.println("You have insufficient funds\n\n"); 
                     anotherTransaction(cuenta); // ask if they want another transaction
@@ -76,7 +80,7 @@ public class AtmUK {
                     // option number 2 is depositing 
                     float deposit; 
                     System.out.println("Please enter amount you would wish to deposit: "); 
-                    deposit = in.nextFloat();
+                    deposit = sc.nextFloat();
                     // Todo: actualizar tanto la cuenta como el atm
                     
                     // Todo: Mostrar resumen de transacción o error
@@ -99,11 +103,12 @@ public class AtmUK {
         }
     }
     public static void anotherTransaction(Account cuenta){
+        Scanner sc = new Scanner(System.in);
         System.out.println("Do you want another transaction?\n\nPress 1 for another transaction\n2 To exit");
-        anotherTransaction = in.nextInt();
-        if(anotherTransaction == 1){
+        int anotherTransactionQ = sc.nextInt();
+        if(anotherTransactionQ == 1){
             transaction(cuenta); // call transaction method
-        } else if(anotherTransaction == 2){
+        } else if(anotherTransactionQ == 2){
             System.out.println("Thanks for choosing us. Good Bye!");
         } else {
             System.out.println("Invalid choice\n\n");
